@@ -164,6 +164,8 @@ AUTH_USER_MODEL = 'message.User'
 
 SERVICE_HOST = 'https://localhost:8000'
 
+LOGIN_URL = '/login/'
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]

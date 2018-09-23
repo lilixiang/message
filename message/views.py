@@ -90,8 +90,10 @@ def logout(request):
 
 @login_required()
 def index(request):
-    content = {}
-    return render(request, 'index.html', {'content': content})
+    if request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('user_contact_list'))
+    else:
+        return HttpResponseRedirect(reverse('login'))
 
 
 @login_required()
