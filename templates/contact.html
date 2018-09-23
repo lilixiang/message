@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %} {{ content.title }} {% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div>
+
+            <a class="btn btn-primary" role="button"
+               href="/send_message/">写私信
+            </a>
+            <a class="btn btn-danger" role="button"
+               href="/logout/">退出
+            </a>
+            <br>
+        </div>
+        <div>
+            <h4>我的联系人</h4>
+            <ul class="list-unstyled">
+                {% csrf_token %}
+
+                {% for contact in content.contacts %}
+                    <div class="contact-list" data-contact-id="{{ contact.contact_id }}">
+
+
+                        <div>
+                            联系人编号：{{ contact.contact_id }}
+                            未读消息数：{{ contact.unread_cnt }}
+                            {#                            <span class="badge badge-pill badge-success"> </span>#}
+                        </div>
+                        <div>
+                            <a class="btn btn-outline-primary btn-sm" role="button"
+                               href="/inbox/{{ contact.contact_id }}/">查看
+                            </a>
+                            <button type="button"
+                                    class="btn btn-outline-secondary btn-sm delete-button delete-contact"
+                                    data-contact-id="{{ contact.contact_id }}">删除
+                            </button>
+                        </div>
+
+
+                    </div>
+
+                {% endfor %}
+
+            </ul>
+        </div>
+    </div>
+    {% load static %}
+    <script src="{% static "/js/message.js" %}"></script>
+
+
+{% endblock %}

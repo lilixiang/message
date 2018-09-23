@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %} {{ content.title }} {% endblock %}
+
+{% block content %}
+
+    <div class="login well span3 offset4">
+        <form class="form-horizontal" id="login" name="login" method="post" action="{{ request.path }}">
+            {% csrf_token %}
+
+            <fieldset>
+                <legend><h4>发送消息</h4></legend>
+                <div class="control-group">
+                    <div class="controls">
+                        <div class="input-prepend">
+                            <span class="add-on"><i class="icon-user"></i></span>
+                            {{ content.form.receiver_id }}
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <div class="input-prepend">
+                            <span class="add-on"><i class="icon-lock"></i></span>
+                            {{ content.form.content }}
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <button class="btn btn-primary" type="submit">发送</button>
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
+        <a class="btn btn-outline-primary" role="button"
+           href="/contact/">返回
+        </a>
+
+
+
+        {% if content.form.errors %}
+            <div class="alert alert-error">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>
+                    {% for form in content.form %}
+                        {{ form.errors }}
+                    {% endfor %}
+                </strong>
+            </div>
+        {% endif %}
+    </div>
+
+
+{% endblock %}
